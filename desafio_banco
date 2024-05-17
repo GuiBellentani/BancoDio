@@ -1,0 +1,60 @@
+q_saque = 3
+saldo = 0
+extrato = ""
+
+while True:
+    
+    print("""Qual operação deseja realizar?
+[1] Depósito
+[2] Saque
+[3] Extrato
+[4] Sair""")
+    
+    op = int(input())
+    
+    if op == 1:
+        print("-="*10)
+        print(f"{'DEPÓSITO':^20}")
+        print("-="*10)
+        deposito = float(input("Quanto deseja depositar?\n"))
+        saldo += deposito
+        print(f"Seu saldo atual é R${saldo:.2f}")
+        extrato += f"Depósito R${deposito:.2f}\n"
+        print("-="*10)
+        
+    if op == 2:
+        print("-="*10)
+        print(f"{'SAQUE':^21}")
+        print("-="*10)
+        saque = float(input("Qual o valor do saque?\n"))
+        
+        if saldo >= saque and saque <= 500 and q_saque != 0:
+            q_saque -= 1
+            saldo -= saque
+            extrato += f"Saque R${saque:.2f}\n"
+            print("Saque realizado com sucesso")
+            
+        elif saldo < saque:
+            print("Saldo Insuficiente.")
+            
+        elif saque > 500:
+            print("Saque não realizad.")
+            print("Limite de R$500.00 atingido no saque.")
+            
+        if q_saque == 0:
+            print("Saque não realizad.")
+            print("Limite de 3 saques diários atingido.")
+            
+        print(f"Seu saldo atual é R${saldo:.2f}")
+        print("-="*10)
+        
+    if op == 3:
+        print("-="*10)
+        print(f"{'EXTRATO':^21}")
+        print("-="*10)
+        print("Não foram realizadas movimentações." if not extrato else extrato)
+        print(extrato)
+        print("-="*10)
+        
+    if op == 4:
+        break
